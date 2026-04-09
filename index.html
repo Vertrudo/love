@@ -3,39 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Для тебя ❤️</title>
+  <title>Для Алины 🤍</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg1: #0d0b14;
-      --bg2: #1a1124;
-      --card: rgba(255,255,255,0.08);
-      --card-border: rgba(255,255,255,0.14);
-      --text: #fff7fb;
-      --muted: #f3dfe8;
-      --accent: #f5adc2;
-      --accent-2: #ff7aa8;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --bg-1: #120f1d;
+      --bg-2: #241637;
+      --bg-3: #3a2452;
+      --glass: rgba(255,255,255,0.09);
+      --glass-strong: rgba(255,255,255,0.13);
+      --border: rgba(255,255,255,0.16);
+      --text: #fff9fd;
+      --muted: #ecdff0;
+      --accent: #d8b4ff;
+      --accent-2: #f3e7ff;
+      --rose: #ffffff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.33);
+      --radius: 28px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
+      overflow-x: hidden;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(255, 130, 180, 0.18), transparent 30%),
-        radial-gradient(circle at 80% 20%, rgba(184, 117, 255, 0.16), transparent 22%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow-x: hidden;
+        radial-gradient(circle at 10% 20%, rgba(216, 180, 255, 0.16), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.11), transparent 18%),
+        radial-gradient(circle at 50% 80%, rgba(164, 119, 255, 0.18), transparent 25%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2), var(--bg-3));
       position: relative;
     }
 
-    .hearts {
+    .stars, .floaters {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -43,170 +46,210 @@
       z-index: 0;
     }
 
-    .heart {
+    .star {
       position: absolute;
-      bottom: -40px;
-      color: rgba(255, 182, 202, 0.5);
-      animation: floatUp linear forwards;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .floater {
+      position: absolute;
+      bottom: -60px;
+      animation: drift linear forwards;
+      opacity: 0;
       user-select: none;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
     }
 
-    @keyframes floatUp {
+    @keyframes drift {
       0% {
-        transform: translateY(0) scale(1);
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.95);
         opacity: 0;
       }
-      15% {
-        opacity: 1;
-      }
+      12% { opacity: 0.9; }
       100% {
-        transform: translateY(-115vh) scale(1.4);
+        transform: translateY(-115vh) translateX(25px) rotate(18deg) scale(1.15);
         opacity: 0;
       }
     }
 
-    .wrapper {
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 28px 18px 70px;
       position: relative;
       z-index: 1;
-      width: min(100%, 1100px);
-      margin: 0 auto;
-      padding: 32px 18px 60px;
     }
 
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
       gap: 22px;
+      position: relative;
     }
 
-    .eyebrow {
+    .mini-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #f7ecff;
+      padding: 10px 16px;
+      border-radius: 999px;
       font-size: 14px;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #ffd2e3;
-      opacity: 0.85;
+      backdrop-filter: blur(10px);
     }
 
     h1 {
-      font-size: clamp(36px, 8vw, 76px);
-      line-height: 1.05;
-      max-width: 900px;
-      text-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      font-size: clamp(40px, 8vw, 82px);
+      line-height: 1.04;
+      max-width: 980px;
+      text-shadow: 0 10px 35px rgba(0,0,0,0.28);
     }
 
-    .subtext {
-      font-size: clamp(17px, 2.5vw, 22px);
+    .highlight {
+      color: var(--accent-2);
+      text-shadow: 0 0 22px rgba(255,255,255,0.18);
+    }
+
+    .subtitle {
+      max-width: 760px;
+      font-size: clamp(18px, 2.4vw, 23px);
+      line-height: 1.7;
       color: var(--muted);
-      max-width: 700px;
-      line-height: 1.6;
     }
 
-    .main-btn, .small-btn {
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    button {
       border: none;
-      border-radius: 999px;
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-      font-weight: 700;
+      transition: 0.18s ease;
       box-shadow: var(--shadow);
+      font-weight: 700;
+      font-family: inherit;
     }
 
-    .main-btn:hover, .small-btn:hover {
+    button:hover {
       transform: translateY(-2px) scale(1.02);
     }
 
-    .main-btn {
-      background: linear-gradient(135deg, var(--accent), #ffd4e3);
-      color: #25111a;
+    .btn-main {
       padding: 18px 34px;
-      font-size: 20px;
+      border-radius: 999px;
+      font-size: 19px;
+      color: #261832;
+      background: linear-gradient(135deg, #f2deff, #dcb8ff);
     }
 
-    .small-btn {
-      background: rgba(255,255,255,0.12);
-      color: white;
-      padding: 13px 22px;
+    .btn-ghost {
+      padding: 15px 24px;
+      border-radius: 999px;
       font-size: 16px;
+      color: white;
+      background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.14);
     }
 
-    .hint {
+    .scroll-note {
       font-size: 14px;
-      color: #f8d6e4;
-      opacity: 0.8;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      opacity: 0.82;
+      color: #f6e9ff;
     }
 
     .section {
-      margin-top: 42px;
+      margin-top: 26px;
       padding: 30px;
-      border-radius: 28px;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      background: var(--glass);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
-    .section h2 {
-      font-size: clamp(28px, 4vw, 44px);
+    .section-title {
+      font-size: clamp(28px, 4vw, 46px);
+      text-align: center;
       margin-bottom: 14px;
-      text-align: center;
     }
 
-    .section p.lead {
-      text-align: center;
-      color: var(--muted);
+    .section-lead {
       font-size: 18px;
-      line-height: 1.7;
-      max-width: 760px;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 790px;
+      text-align: center;
       margin: 0 auto 24px;
     }
 
-    .memory-grid {
+    .grid-3, .grid-4, .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
-      margin-top: 18px;
     }
 
-    .memory-card {
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .card {
+      padding: 22px 18px;
       border-radius: 24px;
-      padding: 24px 18px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       min-height: 170px;
     }
 
-    .memory-card h3 {
+    .card h3 {
+      font-size: 22px;
       margin-bottom: 10px;
-      font-size: 21px;
     }
 
-    .memory-card p {
+    .card p {
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
       font-size: 16px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff5fd;
+      font-size: 14px;
     }
 
     .controls {
@@ -214,171 +257,375 @@
       flex-wrap: wrap;
       gap: 12px;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: 18px;
     }
 
-    .letter {
-      margin-top: 22px;
+    .hidden { display: none; }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .letter, .secret-box, .final-box, .sleep-box, .cosmic-box {
+      margin-top: 18px;
       padding: 24px;
       border-radius: 24px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
       line-height: 1.8;
-      font-size: 18px;
       color: var(--muted);
+      font-size: 18px;
       white-space: pre-line;
     }
 
     .gallery {
-      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .photo {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4/5;
       border-radius: 24px;
       background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
-      border: 1px solid rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 18px;
-      color: #ffe6ef;
-      font-size: 18px;
-      line-height: 1.5;
+      color: #fff2fa;
+      font-size: 17px;
+      line-height: 1.6;
     }
 
-    .final-message {
-      text-align: center;
-      padding: 22px;
-      font-size: clamp(24px, 4vw, 42px);
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .footer-note {
+    .timeline {
+      display: grid;
+      gap: 14px;
       margin-top: 18px;
+    }
+
+    .timeline-item {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      color: #fff8fd;
+    }
+
+    .final-text {
       text-align: center;
-      color: #f9d9e6;
+      font-size: clamp(24px, 4vw, 42px);
+      line-height: 1.4;
+      font-weight: 700;
+      color: #fff8fd;
+    }
+
+    .tiny-note {
+      margin-top: 10px;
+      text-align: center;
+      color: #f4e4f7;
       opacity: 0.82;
       font-size: 14px;
     }
 
-    @media (max-width: 640px) {
-      .section {
-        padding: 22px 16px;
-        border-radius: 22px;
-      }
+    .rose {
+      font-size: 20px;
+      display: inline-block;
+      transform: translateY(1px);
+    }
 
-      .letter {
-        font-size: 17px;
-      }
+    .name-glow {
+      color: white;
+      text-shadow: 0 0 18px rgba(255,255,255,0.16);
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 22px 16px; }
+      .letter, .secret-box, .final-box, .sleep-box, .cosmic-box { font-size: 17px; }
+      .hero { gap: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="hearts" id="hearts"></div>
+  <div class="stars" id="stars"></div>
+  <div class="floaters" id="floaters"></div>
 
-  <div class="wrapper">
+  <div class="page">
     <section class="hero">
-      <div class="eyebrow">маленький сюрприз для тебя</div>
-      <h1>С твоим прекрасным днём 💖</h1>
-      <p class="subtext">Этот сайт — небольшое напоминание о том, как сильно ты для меня важна. Здесь спрятано немного тепла, воспоминаний и очень много любви.</p>
-      <button class="main-btn" onclick="openSurprise()">Нажми сюда ✨</button>
-      <div class="hint">Обещаю, дальше будет интереснее</div>
+      <div class="mini-badge">🤍 небольшой подарок для Алины</div>
+      <h1>
+        Для <span class="highlight name-glow">Алины</span><br>
+        с нежностью, теплом<br>
+        и совсем чуть-чуть <span class="highlight">космоса</span> 🚀
+      </h1>
+      <p class="subtitle">
+        Я хотел сделать не просто страницу, а маленький мир, который хотя бы немного похож на тебя:
+        тёплый, красивый, уютный, сиреневый, с белыми розами, мягкостью, смешными деталями и чем-то очень личным.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-main" onclick="openMain()">Открыть сюрприз ✨</button>
+        <button class="btn-ghost" onclick="scrollToSection('vibe')">Твой вайб 💜</button>
+      </div>
+      <div class="scroll-note">Листай медленно — здесь спрятано несколько маленьких приколов</div>
     </section>
 
-    <section id="surprise" class="section hidden">
-      <h2>Для самой особенной девушки 🌷</h2>
-      <p class="lead">Иногда хочется собрать все чувства, воспоминания и тёплые моменты в одном месте. Пусть это будет нашим маленьким уголком.</p>
+    <section id="main" class="section hidden">
+      <h2 class="section-title">Ты очень особенная <span class="rose">🤍</span></h2>
+      <p class="section-lead">
+        Есть люди, рядом с которыми просто становится теплее. И ты именно такая.
+        Поэтому здесь всё собрано вокруг того, что с тобой ассоциируется: сиреневый свет, белая роза, кролик,
+        пушистый самоед, кола, сонный вайб, уют, немного аниме, немного милоты и день, который совпал с космосом.
+      </p>
 
-      <div class="memory-grid">
-        <div class="memory-card fade-in">
-          <h3>💫 Первый момент</h3>
-          <p>Сюда можно вписать ваше знакомство, первую переписку или момент, который ты до сих пор вспоминаешь с улыбкой.</p>
+      <div class="chips">
+        <div class="chip">💜 тёплые сиреневые оттенки</div>
+        <div class="chip">🤍 белая роза</div>
+        <div class="chip">🐰 кролик</div>
+        <div class="chip">🐶 самоед</div>
+        <div class="chip">🥤 cola energy</div>
+        <div class="chip">😴 queen of sleep</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn-ghost" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
+        <button class="btn-ghost" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
+        <button class="btn-ghost" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
+      </div>
+
+      <div id="letter" class="letter hidden">
+Алина,
+
+Я хотел сделать тебе не просто подарок, а что-то, во что можно зайти, посмотреть, поулыбаться и почувствовать, что это всё правда делалось именно для тебя.
+
+Пусть этот сайт пока состоит из кнопок, света, текста и маленьких деталей — но на самом деле внутри него намного больше.
+Там моё внимание к тебе.
+Моё тепло.
+И желание увидеть твою улыбку, когда ты всё это откроешь.
+
+Ты очень красивая.
+Очень уютная.
+Очень своя.
+И очень-очень важная для меня 🤍
+      </div>
+
+      <div id="sleepBox" class="sleep-box hidden">
+Если ты сейчас хочешь спать, то это очень в твоём стиле 😌
+
+Так что официальный режим для Алины включён:
+спать можно,
+зевать можно,
+быть милой в полусне — обязательно.
+
+И да, на всякий случай:
+ты мне нравишься даже сонная,
+очень сонная,
+максимально сонная,
+и даже в режиме «я сейчас ничего не понимаю, дайте лечь обратно» 💜
+      </div>
+
+      <div id="colaBox" class="secret-box hidden">
+Экстренное сообщение:
+уровень милоты Алины стабильно высокий.
+Рекомендуемая поддержка системы:
+1) дать ей колу 🥤
+2) дать ей уют
+3) не мешать быть прекрасной
+      </div>
+    </section>
+
+    <section id="vibe" class="section">
+      <h2 class="section-title">Твой вайб</h2>
+      <p class="section-lead">
+        Я попытался собрать твой образ не серьёзно и скучно, а так, чтобы это было мило, тепло и немного по-нашему.
+      </p>
+
+      <div class="grid-4">
+        <div class="card">
+          <h3>🤍 Белая роза</h3>
+          <p>Самый нежный символ на этом сайте. Спокойная, красивая и очень в тему. Её здесь можно считать твоим маленьким знаком.</p>
         </div>
-        <div class="memory-card fade-in">
-          <h3>🌙 Любимое воспоминание</h3>
-          <p>Сюда добавь ваш особенный день, прогулку, смешную историю или поездку, которая стала для вас важной.</p>
+        <div class="card">
+          <h3>🐰 Кролик</h3>
+          <p>Потому что это не просто милое животное, а ещё и очень личная деталь. Нежность, мягкость и домашний уют в одном существе.</p>
         </div>
-        <div class="memory-card fade-in">
-          <h3>💌 Почему именно ты</h3>
-          <p>Напиши пару искренних фраз о том, за что ты её любишь, что в ней особенного и почему она делает твою жизнь лучше.</p>
+        <div class="card">
+          <h3>🐶 Самоед</h3>
+          <p>Потому что невозможно пройти мимо такого уровня пушистости. Здесь он отвечает за мягкость, свет и хорошее настроение.</p>
+        </div>
+        <div class="card">
+          <h3>🥤 Кола</h3>
+          <p>Нужна как обязательный артефакт. Потому что любой красивый сайт для тебя без колы был бы не до конца настоящим.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Мини-карта нежности</h2>
+      <p class="section-lead">Это блок, который можно потом легко переделать под ваши реальные приколы, но пока я сделал тебе основу.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>🌙 Сонный режим</h3>
+          <p>Если Алина хочет спать, значит мир обязан стать тише, мягче и добрее. Это закон.</p>
+        </div>
+        <div class="card">
+          <h3>💜 Сиреневое настроение</h3>
+          <p>Всё здесь специально сделано в тёплых оттенках, чтобы сайт ощущался нежно, а не просто «романтически по шаблону».</p>
+        </div>
+        <div class="card">
+          <h3>✨ Эффект Алины</h3>
+          <p>Ты из тех людей, которые делают любую штуку уютнее просто своим присутствием. Даже страницу в браузере.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Твои любимые штуки</h2>
+      <p class="section-lead">Я оставил это как милые карточки. Потом можно будет докрутить и сделать ещё точнее.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>🎴 Клинок, рассекающий демонов</h3>
+          <p>Потому что у красивых девушек часто ещё и сильный вкус на любимые истории.</p>
+        </div>
+        <div class="card">
+          <h3>🎬 Лило и Стич</h3>
+          <p>Очень тёплая и уютная ассоциация. Немного хаоса, много сердца и ощущение чего-то родного.</p>
+        </div>
+        <div class="card">
+          <h3>🎧 МУККА</h3>
+          <p>Оставим здесь как часть твоего настроения, потому что музыка тоже про человека очень многое говорит.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">12 апреля — это вообще-то мощно</h2>
+      <p class="section-lead">
+        Потому что твой день рождения — уже сам по себе событие. Но тут ещё и День космонавтики,
+        а в этом году даже Пасха. Слишком сильное совпадение, чтобы его не обыграть.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <strong>🎂 День рождения Алины</strong>
+          Самый главный повод. Без вариантов.
+        </div>
+        <div class="timeline-item">
+          <strong>🚀 День космонавтики</strong>
+          В этот день человечество вышло в космос. Но лично для меня важнее то, что в этот день появилась ты.
+        </div>
+        <div class="timeline-item">
+          <strong>🌸 Пасхальное настроение</strong>
+          Значит в этой дате есть ещё и что-то светлое, тёплое и очень весеннее.
         </div>
       </div>
 
       <div class="controls">
-        <button class="small-btn" onclick="toggleLetter()">Открыть письмо 💌</button>
-        <button class="small-btn" onclick="toggleGallery()">Показать галерею 📸</button>
-        <button class="small-btn" onclick="showFinal()">Финальный сюрприз 🎁</button>
+        <button class="btn-ghost" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
       </div>
 
-      <div id="letter" class="letter hidden">
-Моя хорошая,
+      <div id="cosmicBox" class="cosmic-box hidden">
+Официальное заявление:
 
-Если ты читаешь это, значит мой маленький сюрприз сработал.
-Я просто хочу, чтобы ты ещё раз почувствовала, как много ты для меня значишь.
-Спасибо тебе за твою улыбку, за твоё тепло, за моменты, которые делают жизнь ярче.
+12 апреля — это день, когда случилось сразу несколько серьёзных событий.
+Но если честно,
+рождение Алины в этом списке уверенно забирает первое место.
 
-Ты делаешь мой мир лучше просто тем, что ты в нём есть.
-И я очень хочу, чтобы ты улыбалась сейчас, читая это ❤️
+Извини, космос,
+сегодня ты только второй 🌌
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Галерея для ваших фото</h2>
+      <p class="section-lead">Сюда ты потом вставишь реальные фотографии. Пока я оставил красивые заглушки, чтобы уже был понятен стиль.</p>
+
+      <div class="gallery">
+        <div class="photo">📷 Здесь можно поставить фото, где она выглядит особенно красивой</div>
+        <div class="photo">📷 Здесь — ваше любимое совместное фото</div>
+        <div class="photo">📷 Здесь — что-то смешное, тёплое или очень ваше</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Секретный блок</h2>
+      <p class="section-lead">Это уже чисто для прикола. Открывается отдельной кнопкой и даёт ощущение маленькой пасхалки.</p>
+      <div class="controls">
+        <button class="btn-main" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
       </div>
 
-      <div id="gallery" class="gallery hidden">
-        <div class="photo">📷 Здесь будет ваша первая фотография</div>
-        <div class="photo">📷 Здесь будет ваше любимое совместное фото</div>
-        <div class="photo">📷 Здесь можно поставить фото с прогулки или поездки</div>
-      </div>
-
-      <div id="final" class="hidden">
-        <div class="section" style="margin-top: 24px;">
-          <div class="final-message">Я люблю тебя сильнее, чем могут передать любые кнопки, слова и сайты ❤️</div>
-          <div class="footer-note">Этот сайт можно сделать ещё красивее: добавить ваши фото, музыку и реальные воспоминания.</div>
+      <div id="finalGift" class="final-box hidden">
+        <div class="final-text">
+          Алина,
+          ты правда очень-очень классная.
+          И этот сайт — мой способ сказать тебе:
+          ты для меня особенная 🤍
         </div>
+        <div class="tiny-note">А если ты сейчас улыбаешься, значит весь этот сюрприз уже сработал как надо.</div>
       </div>
     </section>
   </div>
 
   <script>
-    const heartsContainer = document.getElementById('hearts');
+    const stars = document.getElementById('stars');
+    const floaters = document.getElementById('floaters');
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.textContent = Math.random() > 0.5 ? '❤' : '✨';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (16 + Math.random() * 18) + 'px';
-      heart.style.animationDuration = (6 + Math.random() * 6) + 's';
-      heart.style.opacity = (0.3 + Math.random() * 0.5).toFixed(2);
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heart.remove(), 12000);
+    for (let i = 0; i < 70; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDelay = (Math.random() * 3).toFixed(2) + 's';
+      star.style.opacity = (0.2 + Math.random() * 0.8).toFixed(2);
+      stars.appendChild(star);
     }
 
-    setInterval(createHeart, 500);
+    const symbols = ['🤍', '💜', '✨', '🐰', '🌸'];
 
-    function openSurprise() {
-      const block = document.getElementById('surprise');
+    function createFloater() {
+      const item = document.createElement('div');
+      item.className = 'floater';
+      item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      item.style.left = Math.random() * 100 + 'vw';
+      item.style.fontSize = (16 + Math.random() * 18) + 'px';
+      item.style.animationDuration = (7 + Math.random() * 6) + 's';
+      floaters.appendChild(item);
+      setTimeout(() => item.remove(), 14000);
+    }
+
+    setInterval(createFloater, 700);
+
+    function openMain() {
+      const block = document.getElementById('main');
       block.classList.remove('hidden');
       block.classList.add('fade-in');
       block.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function toggleLetter() {
-      document.getElementById('letter').classList.toggle('hidden');
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function toggleGallery() {
-      document.getElementById('gallery').classList.toggle('hidden');
-    }
-
-    function showFinal() {
-      const final = document.getElementById('final');
-      final.classList.remove('hidden');
-      final.classList.add('fade-in');
-      final.scrollIntoView({ behavior: 'smooth' });
+    function toggleBlock(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('hidden');
+      if (!el.classList.contains('hidden')) {
+        el.classList.add('fade-in');
+      }
     }
   </script>
 </body>
