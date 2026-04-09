@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Для тебя ❤️</title>
+<style>
+body {
+    background: #0f0f0f;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+}
+h1 {
+    margin-top: 100px;
+    font-size: 40px;
+}
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: pink;
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Я приготовил для тебя кое-что 💖</h1>
+
+<button onclick="show()">Нажми сюда</button>
+
+<div id="msg" class="hidden">
+    <h2>Ты самая лучшая 💕</h2>
+    <p>Спасибо, что ты есть у меня</p>
+</div>
+
+<script>
+function show() {
+    document.getElementById("msg").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
