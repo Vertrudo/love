@@ -18,7 +18,6 @@
       --muted: #ecdff0;
       --accent: #d8b4ff;
       --accent-2: #f3e7ff;
-      --rose: #ffffff;
       --shadow: 0 20px 60px rgba(0,0,0,0.33);
       --radius: 28px;
     }
@@ -82,7 +81,7 @@
     }
 
     .page {
-      width: min(1120px, 100%);
+      width: min(1180px, 100%);
       margin: 0 auto;
       padding: 28px 18px 70px;
       position: relative;
@@ -151,9 +150,7 @@
       font-family: inherit;
     }
 
-    button:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
+    button:hover { transform: translateY(-2px) scale(1.02); }
 
     .btn-main {
       padding: 18px 34px;
@@ -164,9 +161,9 @@
     }
 
     .btn-ghost {
-      padding: 15px 24px;
+      padding: 14px 22px;
       border-radius: 999px;
-      font-size: 16px;
+      font-size: 15px;
       color: white;
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.14);
@@ -178,9 +175,11 @@
       color: #f6e9ff;
     }
 
-    .section {
+    .hidden { display: none; }
+
+    .section-shell {
       margin-top: 26px;
-      padding: 30px;
+      padding: 22px;
       border-radius: var(--radius);
       background: var(--glass);
       border: 1px solid var(--border);
@@ -188,13 +187,96 @@
       backdrop-filter: blur(12px);
     }
 
-    .section-title {
+    .slider-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .slider-title {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 700;
+    }
+
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .arrow-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: white;
+      font-size: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .counter {
+      font-size: 14px;
+      color: var(--muted);
+      min-width: 56px;
+      text-align: center;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff4fd;
+      font-size: 14px;
+      box-shadow: none;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #f2deff, #dcb8ff);
+      color: #261832;
+      border-color: transparent;
+    }
+
+    .slider-window {
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.45s ease;
+      will-change: transform;
+    }
+
+    .slide {
+      min-width: 100%;
+      padding: 30px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .slide h2 {
       font-size: clamp(28px, 4vw, 46px);
       text-align: center;
       margin-bottom: 14px;
     }
 
-    .section-lead {
+    .lead {
       font-size: 18px;
       line-height: 1.75;
       color: var(--muted);
@@ -208,13 +290,8 @@
       gap: 18px;
     }
 
-    .grid-3 {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 
     .card {
       padding: 22px 18px;
@@ -258,17 +335,6 @@
       gap: 12px;
       justify-content: center;
       margin-top: 18px;
-    }
-
-    .hidden { display: none; }
-
-    .fade-in {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .letter, .secret-box, .final-box, .sleep-box, .cosmic-box {
@@ -339,21 +405,24 @@
       font-size: 14px;
     }
 
-    .rose {
-      font-size: 20px;
-      display: inline-block;
-      transform: translateY(1px);
-    }
-
     .name-glow {
       color: white;
       text-shadow: 0 0 18px rgba(255,255,255,0.16);
     }
 
-    @media (max-width: 640px) {
-      .section { padding: 22px 16px; }
+    .swipe-note {
+      margin-top: 10px;
+      text-align: center;
+      color: #f0e0f7;
+      font-size: 13px;
+      opacity: 0.78;
+    }
+
+    @media (max-width: 720px) {
+      .slide { padding: 22px 16px; }
       .letter, .secret-box, .final-box, .sleep-box, .cosmic-box { font-size: 17px; }
-      .hero { gap: 18px; }
+      .slider-header { justify-content: center; }
+      .tabs { justify-content: center; }
     }
   </style>
 </head>
@@ -374,36 +443,49 @@
         тёплый, красивый, уютный, сиреневый, с белыми розами, мягкостью, смешными деталями и чем-то очень личным.
       </p>
       <div class="hero-actions">
-        <button class="btn-main" onclick="openMain()">Открыть сюрприз ✨</button>
-        <button class="btn-ghost" onclick="scrollToSection('vibe')">Твой вайб 💜</button>
+        <button class="btn-main" onclick="openSlider()">Открыть сюрприз ✨</button>
       </div>
-      <div class="scroll-note">Листай медленно — здесь спрятано несколько маленьких приколов</div>
+      <div class="scroll-note">Теперь блоки листаются стрелками вправо и влево</div>
     </section>
 
-    <section id="main" class="section hidden">
-      <h2 class="section-title">Ты очень особенная <span class="rose">🤍</span></h2>
-      <p class="section-lead">
-        Есть люди, рядом с которыми просто становится теплее. И ты именно такая.
-        Поэтому здесь всё собрано вокруг того, что с тобой ассоциируется: сиреневый свет, белая роза, кролик,
-        пушистый самоед, кола, сонный вайб, уют, немного аниме, немного милоты и день, который совпал с космосом.
-      </p>
-
-      <div class="chips">
-        <div class="chip">💜 тёплые сиреневые оттенки</div>
-        <div class="chip">🤍 белая роза</div>
-        <div class="chip">🐰 кролик</div>
-        <div class="chip">🐶 самоед</div>
-        <div class="chip">🥤 cola energy</div>
-        <div class="chip">😴 queen of sleep</div>
+    <section id="sliderSection" class="section-shell hidden">
+      <div class="slider-header">
+        <div class="slider-title">История для Алины</div>
+        <div class="slider-controls">
+          <button class="arrow-btn" onclick="prevSlide()">←</button>
+          <div class="counter" id="counter">1 / 7</div>
+          <button class="arrow-btn" onclick="nextSlide()">→</button>
+        </div>
       </div>
 
-      <div class="controls">
-        <button class="btn-ghost" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
-        <button class="btn-ghost" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
-        <button class="btn-ghost" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
-      </div>
+      <div class="tabs" id="tabs"></div>
 
-      <div id="letter" class="letter hidden">
+      <div class="slider-window">
+        <div class="slider-track" id="sliderTrack">
+          <article class="slide">
+            <h2>Ты очень особенная 🤍</h2>
+            <p class="lead">
+              Есть люди, рядом с которыми просто становится теплее. И ты именно такая.
+              Поэтому здесь всё собрано вокруг того, что с тобой ассоциируется: сиреневый свет, белая роза, кролик,
+              пушистый самоед, кола, сонный вайб, уют, немного аниме, немного милоты и день, который совпал с космосом.
+            </p>
+
+            <div class="chips">
+              <div class="chip">💜 тёплые сиреневые оттенки</div>
+              <div class="chip">🤍 белая роза</div>
+              <div class="chip">🐰 кролик</div>
+              <div class="chip">🐶 самоед</div>
+              <div class="chip">🥤 cola energy</div>
+              <div class="chip">😴 queen of sleep</div>
+            </div>
+
+            <div class="controls">
+              <button class="btn-ghost" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
+              <button class="btn-ghost" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
+              <button class="btn-ghost" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
+            </div>
+
+            <div id="letter" class="letter hidden">
 Алина,
 
 Я хотел сделать тебе не просто подарок, а что-то, во что можно зайти, посмотреть, поулыбаться и почувствовать, что это всё правда делалось именно для тебя.
@@ -417,9 +499,9 @@
 Очень уютная.
 Очень своя.
 И очень-очень важная для меня 🤍
-      </div>
+            </div>
 
-      <div id="sleepBox" class="sleep-box hidden">
+            <div id="sleepBox" class="sleep-box hidden">
 Если ты сейчас хочешь спать, то это очень в твоём стиле 😌
 
 Так что официальный режим для Алины включён:
@@ -432,111 +514,105 @@
 очень сонная,
 максимально сонная,
 и даже в режиме «я сейчас ничего не понимаю, дайте лечь обратно» 💜
-      </div>
+            </div>
 
-      <div id="colaBox" class="secret-box hidden">
+            <div id="colaBox" class="secret-box hidden">
 Экстренное сообщение:
 уровень милоты Алины стабильно высокий.
 Рекомендуемая поддержка системы:
 1) дать ей колу 🥤
 2) дать ей уют
 3) не мешать быть прекрасной
-      </div>
-    </section>
+            </div>
+          </article>
 
-    <section id="vibe" class="section">
-      <h2 class="section-title">Твой вайб</h2>
-      <p class="section-lead">
-        Я попытался собрать твой образ не серьёзно и скучно, а так, чтобы это было мило, тепло и немного по-нашему.
-      </p>
+          <article class="slide">
+            <h2>Твой вайб</h2>
+            <p class="lead">
+              Я попытался собрать твой образ не серьёзно и скучно, а так, чтобы это было мило, тепло и немного по-нашему.
+            </p>
+            <div class="grid-4">
+              <div class="card">
+                <h3>🤍 Белая роза</h3>
+                <p>Самый нежный символ на этом сайте. Спокойная, красивая и очень в тему. Её здесь можно считать твоим маленьким знаком.</p>
+              </div>
+              <div class="card">
+                <h3>🐰 Кролик</h3>
+                <p>Потому что это не просто милое животное, а ещё и очень личная деталь. Нежность, мягкость и домашний уют в одном существе.</p>
+              </div>
+              <div class="card">
+                <h3>🐶 Самоед</h3>
+                <p>Потому что невозможно пройти мимо такого уровня пушистости. Здесь он отвечает за мягкость, свет и хорошее настроение.</p>
+              </div>
+              <div class="card">
+                <h3>🥤 Кола</h3>
+                <p>Нужна как обязательный артефакт. Потому что любой красивый сайт для тебя без колы был бы не до конца настоящим.</p>
+              </div>
+            </div>
+          </article>
 
-      <div class="grid-4">
-        <div class="card">
-          <h3>🤍 Белая роза</h3>
-          <p>Самый нежный символ на этом сайте. Спокойная, красивая и очень в тему. Её здесь можно считать твоим маленьким знаком.</p>
-        </div>
-        <div class="card">
-          <h3>🐰 Кролик</h3>
-          <p>Потому что это не просто милое животное, а ещё и очень личная деталь. Нежность, мягкость и домашний уют в одном существе.</p>
-        </div>
-        <div class="card">
-          <h3>🐶 Самоед</h3>
-          <p>Потому что невозможно пройти мимо такого уровня пушистости. Здесь он отвечает за мягкость, свет и хорошее настроение.</p>
-        </div>
-        <div class="card">
-          <h3>🥤 Кола</h3>
-          <p>Нужна как обязательный артефакт. Потому что любой красивый сайт для тебя без колы был бы не до конца настоящим.</p>
-        </div>
-      </div>
-    </section>
+          <article class="slide">
+            <h2>Мини-карта нежности</h2>
+            <p class="lead">Это блок, который можно потом легко переделать под ваши реальные приколы, но пока я сделал тебе основу.</p>
+            <div class="grid-3">
+              <div class="card">
+                <h3>🌙 Сонный режим</h3>
+                <p>Если Алина хочет спать, значит мир обязан стать тише, мягче и добрее. Это закон.</p>
+              </div>
+              <div class="card">
+                <h3>💜 Сиреневое настроение</h3>
+                <p>Всё здесь специально сделано в тёплых оттенках, чтобы сайт ощущался нежно, а не просто «романтически по шаблону».</p>
+              </div>
+              <div class="card">
+                <h3>✨ Эффект Алины</h3>
+                <p>Ты из тех людей, которые делают любую штуку уютнее просто своим присутствием. Даже страницу в браузере.</p>
+              </div>
+            </div>
+          </article>
 
-    <section class="section">
-      <h2 class="section-title">Мини-карта нежности</h2>
-      <p class="section-lead">Это блок, который можно потом легко переделать под ваши реальные приколы, но пока я сделал тебе основу.</p>
+          <article class="slide">
+            <h2>Твои любимые штуки</h2>
+            <p class="lead">Я оставил это как милые карточки. Потом можно будет докрутить и сделать ещё точнее.</p>
+            <div class="grid-3">
+              <div class="card">
+                <h3>🎴 Клинок, рассекающий демонов</h3>
+                <p>Потому что у красивых девушек часто ещё и сильный вкус на любимые истории.</p>
+              </div>
+              <div class="card">
+                <h3>🎬 Лило и Стич</h3>
+                <p>Очень тёплая и уютная ассоциация. Немного хаоса, много сердца и ощущение чего-то родного.</p>
+              </div>
+              <div class="card">
+                <h3>🎧 МУККА</h3>
+                <p>Оставим здесь как часть твоего настроения, потому что музыка тоже про человека очень многое говорит.</p>
+              </div>
+            </div>
+          </article>
 
-      <div class="grid-3">
-        <div class="card">
-          <h3>🌙 Сонный режим</h3>
-          <p>Если Алина хочет спать, значит мир обязан стать тише, мягче и добрее. Это закон.</p>
-        </div>
-        <div class="card">
-          <h3>💜 Сиреневое настроение</h3>
-          <p>Всё здесь специально сделано в тёплых оттенках, чтобы сайт ощущался нежно, а не просто «романтически по шаблону».</p>
-        </div>
-        <div class="card">
-          <h3>✨ Эффект Алины</h3>
-          <p>Ты из тех людей, которые делают любую штуку уютнее просто своим присутствием. Даже страницу в браузере.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Твои любимые штуки</h2>
-      <p class="section-lead">Я оставил это как милые карточки. Потом можно будет докрутить и сделать ещё точнее.</p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>🎴 Клинок, рассекающий демонов</h3>
-          <p>Потому что у красивых девушек часто ещё и сильный вкус на любимые истории.</p>
-        </div>
-        <div class="card">
-          <h3>🎬 Лило и Стич</h3>
-          <p>Очень тёплая и уютная ассоциация. Немного хаоса, много сердца и ощущение чего-то родного.</p>
-        </div>
-        <div class="card">
-          <h3>🎧 МУККА</h3>
-          <p>Оставим здесь как часть твоего настроения, потому что музыка тоже про человека очень многое говорит.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">12 апреля — это вообще-то мощно</h2>
-      <p class="section-lead">
-        Потому что твой день рождения — уже сам по себе событие. Но тут ещё и День космонавтики,
-        а в этом году даже Пасха. Слишком сильное совпадение, чтобы его не обыграть.
-      </p>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <strong>🎂 День рождения Алины</strong>
-          Самый главный повод. Без вариантов.
-        </div>
-        <div class="timeline-item">
-          <strong>🚀 День космонавтики</strong>
-          В этот день человечество вышло в космос. Но лично для меня важнее то, что в этот день появилась ты.
-        </div>
-        <div class="timeline-item">
-          <strong>🌸 Пасхальное настроение</strong>
-          Значит в этой дате есть ещё и что-то светлое, тёплое и очень весеннее.
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn-ghost" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
-      </div>
-
-      <div id="cosmicBox" class="cosmic-box hidden">
+          <article class="slide">
+            <h2>12 апреля — это вообще-то мощно</h2>
+            <p class="lead">
+              Потому что твой день рождения — уже сам по себе событие. Но тут ещё и День космонавтики,
+              а в этом году даже Пасха. Слишком сильное совпадение, чтобы его не обыграть.
+            </p>
+            <div class="timeline">
+              <div class="timeline-item">
+                <strong>🎂 День рождения Алины</strong>
+                Самый главный повод. Без вариантов.
+              </div>
+              <div class="timeline-item">
+                <strong>🚀 День космонавтики</strong>
+                В этот день человечество вышло в космос. Но лично для меня важнее то, что в этот день появилась ты.
+              </div>
+              <div class="timeline-item">
+                <strong>🌸 Пасхальное настроение</strong>
+                Значит в этой дате есть ещё и что-то светлое, тёплое и очень весеннее.
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn-ghost" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
+            </div>
+            <div id="cosmicBox" class="cosmic-box hidden">
 Официальное заявление:
 
 12 апреля — это день, когда случилось сразу несколько серьёзных событий.
@@ -545,36 +621,39 @@
 
 Извини, космос,
 сегодня ты только второй 🌌
-      </div>
-    </section>
+            </div>
+          </article>
 
-    <section class="section">
-      <h2 class="section-title">Галерея для ваших фото</h2>
-      <p class="section-lead">Сюда ты потом вставишь реальные фотографии. Пока я оставил красивые заглушки, чтобы уже был понятен стиль.</p>
+          <article class="slide">
+            <h2>Галерея для ваших фото</h2>
+            <p class="lead">Сюда ты потом вставишь реальные фотографии. Пока я оставил красивые заглушки, чтобы уже был понятен стиль.</p>
+            <div class="gallery">
+              <div class="photo">📷 Здесь можно поставить фото, где она выглядит особенно красивой</div>
+              <div class="photo">📷 Здесь — ваше любимое совместное фото</div>
+              <div class="photo">📷 Здесь — что-то смешное, тёплое или очень ваше</div>
+            </div>
+          </article>
 
-      <div class="gallery">
-        <div class="photo">📷 Здесь можно поставить фото, где она выглядит особенно красивой</div>
-        <div class="photo">📷 Здесь — ваше любимое совместное фото</div>
-        <div class="photo">📷 Здесь — что-то смешное, тёплое или очень ваше</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Секретный блок</h2>
-      <p class="section-lead">Это уже чисто для прикола. Открывается отдельной кнопкой и даёт ощущение маленькой пасхалки.</p>
-      <div class="controls">
-        <button class="btn-main" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
-      </div>
-
-      <div id="finalGift" class="final-box hidden">
-        <div class="final-text">
-          Алина,
-          ты правда очень-очень классная.
-          И этот сайт — мой способ сказать тебе:
-          ты для меня особенная 🤍
+          <article class="slide">
+            <h2>Секретный блок</h2>
+            <p class="lead">Это уже чисто для прикола. Открывается отдельно и даёт ощущение маленькой пасхалки.</p>
+            <div class="controls">
+              <button class="btn-main" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
+            </div>
+            <div id="finalGift" class="final-box hidden">
+              <div class="final-text">
+                Алина,
+                ты правда очень-очень классная.
+                И этот сайт — мой способ сказать тебе:
+                ты для меня особенная 🤍
+              </div>
+              <div class="tiny-note">А если ты сейчас улыбаешься, значит весь этот сюрприз уже сработал как надо.</div>
+            </div>
+          </article>
         </div>
-        <div class="tiny-note">А если ты сейчас улыбаешься, значит весь этот сюрприз уже сработал как надо.</div>
       </div>
+
+      <div class="swipe-note">Можно листать стрелками, нажимать на верхние кнопки и даже свайпать на телефоне.</div>
     </section>
   </div>
 
@@ -593,7 +672,6 @@
     }
 
     const symbols = ['🤍', '💜', '✨', '🐰', '🌸'];
-
     function createFloater() {
       const item = document.createElement('div');
       item.className = 'floater';
@@ -604,30 +682,79 @@
       floaters.appendChild(item);
       setTimeout(() => item.remove(), 14000);
     }
-
     setInterval(createFloater, 700);
 
-    function openMain() {
-      const block = document.getElementById('main');
-      block.classList.remove('hidden');
-      block.classList.add('fade-in');
-      block.scrollIntoView({ behavior: 'smooth' });
+    const sliderSection = document.getElementById('sliderSection');
+    const track = document.getElementById('sliderTrack');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const tabs = document.getElementById('tabs');
+    const labels = ['Начало', 'Твой вайб', 'Нежность', 'Любимое', '12 апреля', 'Фото', 'Финал'];
+    let currentSlide = 0;
+
+    labels.forEach((label, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn';
+      btn.textContent = label;
+      btn.onclick = () => goToSlide(index);
+      tabs.appendChild(btn);
+    });
+
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+      document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+        btn.classList.toggle('active', index === currentSlide);
+      });
     }
 
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    function goToSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      updateSlider();
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    function openSlider() {
+      sliderSection.classList.remove('hidden');
+      sliderSection.scrollIntoView({ behavior: 'smooth' });
+      updateSlider();
     }
 
     function toggleBlock(id) {
       const el = document.getElementById(id);
       if (!el) return;
       el.classList.toggle('hidden');
-      if (!el.classList.contains('hidden')) {
-        el.classList.add('fade-in');
-      }
     }
+
+    let startX = 0;
+    let endX = 0;
+    const sliderWindow = document.querySelector('.slider-window');
+
+    sliderWindow.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    sliderWindow.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    document.addEventListener('keydown', (e) => {
+      if (sliderSection.classList.contains('hidden')) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    updateSlider();
   </script>
 </body>
 </html>
+
+
 
