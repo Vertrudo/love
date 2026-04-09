@@ -12,11 +12,9 @@
       --bg-2: #241637;
       --bg-3: #3a2452;
       --glass: rgba(255,255,255,0.09);
-      --glass-strong: rgba(255,255,255,0.13);
       --border: rgba(255,255,255,0.16);
       --text: #fff9fd;
       --muted: #ecdff0;
-      --accent: #d8b4ff;
       --accent-2: #f3e7ff;
       --shadow: 0 20px 60px rgba(0,0,0,0.33);
       --radius: 28px;
@@ -175,7 +173,7 @@
       color: #f6e9ff;
     }
 
-    .hidden { display: none; }
+    .hidden { display: none !important; }
 
     .section-shell {
       margin-top: 26px;
@@ -303,9 +301,7 @@
       z-index: 2;
     }
 
-    .slide.active::after {
-      opacity: 1;
-    }
+    .slide.active::after { opacity: 1; }
 
     .slide.leave-left {
       opacity: 0;
@@ -494,6 +490,7 @@
       .letter, .secret-box, .final-box, .sleep-box, .cosmic-box { font-size: 17px; }
       .slider-header { justify-content: center; }
       .tabs { justify-content: center; }
+      .slider-window, .slider-track { min-height: 820px; }
     }
   </style>
 </head>
@@ -514,7 +511,7 @@
         тёплый, красивый, уютный, сиреневый, с белыми розами, мягкостью, смешными деталями и чем-то очень личным.
       </p>
       <div class="hero-actions">
-        <button class="btn-main" onclick="openSlider()">Открыть сюрприз ✨</button>
+        <button class="btn-main" id="openBtn" type="button">Открыть сюрприз ✨</button>
       </div>
       <div class="scroll-note">Теперь блоки листаются стрелками вправо и влево</div>
     </section>
@@ -523,17 +520,17 @@
       <div class="slider-header">
         <div class="slider-title">История для Алины</div>
         <div class="slider-controls">
-          <button class="arrow-btn" onclick="prevSlide()">←</button>
+          <button class="arrow-btn" id="prevBtn" type="button">←</button>
           <div class="counter" id="counter">1 / 7</div>
-          <button class="arrow-btn" onclick="nextSlide()">→</button>
+          <button class="arrow-btn" id="nextBtn" type="button">→</button>
         </div>
       </div>
 
       <div class="tabs" id="tabs"></div>
 
-      <div class="slider-window">
+      <div class="slider-window" id="sliderWindow">
         <div class="slider-track" id="sliderTrack">
-          <article class="slide">
+          <article class="slide active">
             <h2>Ты очень особенная 🤍</h2>
             <p class="lead">
               Есть люди, рядом с которыми просто становится теплее. И ты именно такая.
@@ -551,9 +548,9 @@
             </div>
 
             <div class="controls">
-              <button class="btn-ghost" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
-              <button class="btn-ghost" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
-              <button class="btn-ghost" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
+              <button class="btn-ghost" type="button" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
+              <button class="btn-ghost" type="button" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
+              <button class="btn-ghost" type="button" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
             </div>
 
             <div id="letter" class="letter hidden">
@@ -681,7 +678,7 @@
               </div>
             </div>
             <div class="controls">
-              <button class="btn-ghost" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
+              <button class="btn-ghost" type="button" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
             </div>
             <div id="cosmicBox" class="cosmic-box hidden">
 Официальное заявление:
@@ -709,7 +706,7 @@
             <h2>Секретный блок</h2>
             <p class="lead">Это уже чисто для прикола. Открывается отдельно и даёт ощущение маленькой пасхалки.</p>
             <div class="controls">
-              <button class="btn-main" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
+              <button class="btn-main" type="button" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
             </div>
             <div id="finalGift" class="final-box hidden">
               <div class="final-text">
@@ -732,6 +729,18 @@
   <script>
     const stars = document.getElementById('stars');
     const floaters = document.getElementById('floaters');
+    const sliderSection = document.getElementById('sliderSection');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const tabs = document.getElementById('tabs');
+    const sliderWindow = document.getElementById('sliderWindow');
+    const openBtn = document.getElementById('openBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const labels = ['Начало', 'Твой вайб', 'Нежность', 'Любимое', '12 апреля', 'Фото', 'Финал'];
+    let currentSlide = 0;
+    let isAnimating = false;
 
     for (let i = 0; i < 70; i++) {
       const star = document.createElement('div');
@@ -756,19 +765,12 @@
     }
     setInterval(createFloater, 700);
 
-    const sliderSection = document.getElementById('sliderSection');
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const counter = document.getElementById('counter');
-    const tabs = document.getElementById('tabs');
-    const labels = ['Начало', 'Твой вайб', 'Нежность', 'Любимое', '12 апреля', 'Фото', 'Финал'];
-    let currentSlide = 0;
-    let isAnimating = false;
-
     labels.forEach((label, index) => {
       const btn = document.createElement('button');
       btn.className = 'tab-btn';
+      btn.type = 'button';
       btn.textContent = label;
-      btn.onclick = () => goToSlide(index);
+      btn.addEventListener('click', () => goToSlide(index));
       tabs.appendChild(btn);
     });
 
@@ -790,12 +792,10 @@
 
         const noise = ctx.createBufferSource();
         noise.buffer = noiseBuffer;
-
         const filter = ctx.createBiquadFilter();
         filter.type = 'bandpass';
         filter.frequency.value = 900;
         filter.Q.value = 0.8;
-
         const gain = ctx.createGain();
         gain.gain.setValueAtTime(0.001, ctx.currentTime);
         gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.01);
@@ -814,7 +814,7 @@
     function setInitialSlides() {
       slides.forEach((slide, index) => {
         slide.classList.remove('active', 'leave-left', 'leave-right', 'enter-left', 'enter-right');
-        if (index === 0) slide.classList.add('active');
+        if (index === currentSlide) slide.classList.add('active');
       });
     }
 
@@ -833,25 +833,23 @@
       isAnimating = true;
       const oldSlide = slides[currentSlide];
       const newSlide = slides[nextIndex];
-      const directionForward = nextIndex > currentSlide || (currentSlide === slides.length - 1 && nextIndex === 0);
+
+      const movingForward = nextIndex > currentSlide || (currentSlide === slides.length - 1 && nextIndex === 0);
 
       slides.forEach(slide => {
         slide.classList.remove('leave-left', 'leave-right', 'enter-left', 'enter-right');
       });
 
+      newSlide.classList.add(movingForward ? 'enter-left' : 'enter-right');
+      void newSlide.offsetWidth;
       oldSlide.classList.remove('active');
-      newSlide.classList.remove('active');
-      newSlide.classList.add(directionForward ? 'enter-left' : 'enter-right');
-
-      requestAnimationFrame(() => {
-        oldSlide.classList.add(directionForward ? 'leave-left' : 'leave-right');
-        newSlide.classList.add('active');
-        newSlide.classList.remove(directionForward ? 'enter-left' : 'enter-right');
-        playPageSound();
-      });
+      oldSlide.classList.add(movingForward ? 'leave-left' : 'leave-right');
+      newSlide.classList.add('active');
+      newSlide.classList.remove(movingForward ? 'enter-left' : 'enter-right');
 
       currentSlide = nextIndex;
       updateTabs();
+      playPageSound();
 
       setTimeout(() => {
         oldSlide.classList.remove('leave-left', 'leave-right');
@@ -876,9 +874,13 @@
       el.classList.toggle('hidden');
     }
 
+    openBtn.addEventListener('click', openSlider);
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.toggleBlock = toggleBlock;
+
     let startX = 0;
     let endX = 0;
-    const sliderWindow = document.querySelector('.slider-window');
 
     sliderWindow.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
@@ -901,49 +903,7 @@
 
     setInitialSlides();
     updateTabs();
-    }
-
-    function nextSlide() { goToSlide(currentSlide + 1); }
-    function prevSlide() { goToSlide(currentSlide - 1); }
-
-    function openSlider() {
-      sliderSection.classList.remove('hidden');
-      sliderSection.scrollIntoView({ behavior: 'smooth' });
-      updateSlider();
-    }
-
-    function toggleBlock(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.classList.toggle('hidden');
-    }
-
-    let startX = 0;
-    let endX = 0;
-    const sliderWindow = document.querySelector('.slider-window');
-
-    sliderWindow.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    sliderWindow.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
-      }
-    }, { passive: true });
-
-    document.addEventListener('keydown', (e) => {
-      if (sliderSection.classList.contains('hidden')) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-    });
-
-    updateSlider();
   </script>
 </body>
 </html>
-
 
