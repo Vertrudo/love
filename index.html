@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Для Алины 🤍</title>
+  <title>Сказка для Алины 🤍</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg-1: #120f1d;
       --bg-2: #241637;
-      --bg-3: #3a2452;
-      --glass: rgba(255,255,255,0.09);
-      --border: rgba(255,255,255,0.16);
+      --bg-3: #3e2857;
+      --glass: rgba(255,255,255,0.08);
+      --glass-2: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.14);
       --text: #fff9fd;
-      --muted: #ecdff0;
-      --accent-2: #f3e7ff;
-      --shadow: 0 20px 60px rgba(0,0,0,0.33);
+      --muted: #ece0f0;
+      --accent: #efdfff;
+      --accent-2: #dcb8ff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
       --radius: 28px;
     }
 
@@ -28,9 +30,9 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 10% 20%, rgba(216, 180, 255, 0.16), transparent 22%),
-        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.11), transparent 18%),
-        radial-gradient(circle at 50% 80%, rgba(164, 119, 255, 0.18), transparent 25%),
+        radial-gradient(circle at 10% 20%, rgba(216, 180, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.1), transparent 18%),
+        radial-gradient(circle at 55% 80%, rgba(164, 119, 255, 0.15), transparent 25%),
         linear-gradient(160deg, var(--bg-1), var(--bg-2), var(--bg-3));
       position: relative;
     }
@@ -94,7 +96,6 @@
       align-items: center;
       text-align: center;
       gap: 22px;
-      position: relative;
     }
 
     .mini-badge {
@@ -113,30 +114,22 @@
     }
 
     h1 {
-      font-size: clamp(40px, 8vw, 82px);
+      font-size: clamp(38px, 7vw, 82px);
       line-height: 1.04;
       max-width: 980px;
       text-shadow: 0 10px 35px rgba(0,0,0,0.28);
     }
 
     .highlight {
-      color: var(--accent-2);
-      text-shadow: 0 0 22px rgba(255,255,255,0.18);
+      color: var(--accent);
+      text-shadow: 0 0 22px rgba(255,255,255,0.16);
     }
 
     .subtitle {
-      max-width: 760px;
+      max-width: 780px;
       font-size: clamp(18px, 2.4vw, 23px);
       line-height: 1.7;
       color: var(--muted);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 4px;
     }
 
     button {
@@ -155,7 +148,7 @@
       border-radius: 999px;
       font-size: 19px;
       color: #261832;
-      background: linear-gradient(135deg, #f2deff, #dcb8ff);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
     }
 
     .btn-ghost {
@@ -244,7 +237,7 @@
     }
 
     .tab-btn.active {
-      background: linear-gradient(135deg, #f2deff, #dcb8ff);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #261832;
       border-color: transparent;
     }
@@ -254,13 +247,13 @@
       border-radius: 24px;
       perspective: 1600px;
       position: relative;
-      min-height: 760px;
+      min-height: 860px;
     }
 
     .slider-track {
       position: relative;
       width: 100%;
-      min-height: 760px;
+      min-height: 860px;
     }
 
     .slide {
@@ -281,27 +274,12 @@
       overflow-y: auto;
     }
 
-    .slide::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 70px;
-      height: 100%;
-      background: linear-gradient(to left, rgba(255,255,255,0.06), transparent);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
     .slide.active {
       opacity: 1;
       pointer-events: auto;
       transform: rotateY(0deg) scale(1);
       z-index: 2;
     }
-
-    .slide.active::after { opacity: 1; }
 
     .slide.leave-left {
       opacity: 0;
@@ -328,62 +306,40 @@
     }
 
     .slide h2 {
-      font-size: clamp(28px, 4vw, 46px);
+      font-size: clamp(30px, 4vw, 46px);
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .lead {
-      font-size: 18px;
-      line-height: 1.75;
+      font-size: 20px;
+      line-height: 1.8;
       color: var(--muted);
-      max-width: 790px;
+      max-width: 860px;
       text-align: center;
-      margin: 0 auto 24px;
+      margin: 0 auto 28px;
+      white-space: pre-line;
     }
 
-    .grid-3, .grid-4, .gallery {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-
-    .card {
-      padding: 22px 18px;
+    .story-image {
+      width: 100%;
+      max-width: 920px;
+      display: block;
+      margin: 0 auto;
       border-radius: 24px;
-      background: rgba(255,255,255,0.08);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
       border: 1px solid rgba(255,255,255,0.12);
-      min-height: 170px;
+      object-fit: cover;
+      background: rgba(255,255,255,0.06);
+      aspect-ratio: 16 / 9;
     }
 
-    .card h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 16px;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .chip {
-      padding: 10px 15px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff5fd;
-      font-size: 14px;
+    .image-note {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      color: #f4e7f7;
+      opacity: 0.7;
     }
 
     .controls {
@@ -391,80 +347,48 @@
       flex-wrap: wrap;
       gap: 12px;
       justify-content: center;
-      margin-top: 18px;
+      margin-top: 26px;
     }
 
-    .letter, .secret-box, .final-box, .sleep-box, .cosmic-box {
-      margin-top: 18px;
-      padding: 24px;
+    .gift-panel {
+      margin-top: 22px;
+      padding: 26px;
       border-radius: 24px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      line-height: 1.8;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
       color: var(--muted);
+      line-height: 1.85;
       font-size: 18px;
+      text-align: center;
       white-space: pre-line;
     }
 
-    .gallery {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      margin-top: 18px;
-    }
-
-    .photo {
-      aspect-ratio: 4/5;
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 18px;
-      color: #fff2fa;
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .timeline-item {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .timeline-item strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 17px;
-      color: #fff8fd;
-    }
-
-    .final-text {
-      text-align: center;
-      font-size: clamp(24px, 4vw, 42px);
-      line-height: 1.4;
-      font-weight: 700;
-      color: #fff8fd;
-    }
-
-    .tiny-note {
-      margin-top: 10px;
-      text-align: center;
-      color: #f4e4f7;
-      opacity: 0.82;
-      font-size: 14px;
-    }
-
-    .name-glow {
+    .gift-panel strong {
       color: white;
-      text-shadow: 0 0 18px rgba(255,255,255,0.16);
+      font-size: 22px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .gift-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      text-align: left;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gift-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .gift-item b {
+      color: white;
     }
 
     .swipe-note {
@@ -475,22 +399,12 @@
       opacity: 0.78;
     }
 
-    .book-note {
-      margin-top: 8px;
-      text-align: center;
-      color: #f7ecff;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.72;
-    }
-
     @media (max-width: 720px) {
       .slide { padding: 22px 16px; }
-      .letter, .secret-box, .final-box, .sleep-box, .cosmic-box { font-size: 17px; }
+      .lead { font-size: 18px; }
       .slider-header { justify-content: center; }
       .tabs { justify-content: center; }
-      .slider-window, .slider-track { min-height: 820px; }
+      .slider-window, .slider-track { min-height: 780px; }
     }
   </style>
 </head>
@@ -500,28 +414,25 @@
 
   <div class="page">
     <section class="hero">
-      <div class="mini-badge">🤍 небольшой подарок для Алины</div>
+      <div class="mini-badge">🤍 маленькая сказка для Алины</div>
       <h1>
-        Для <span class="highlight name-glow">Алины</span><br>
-        с нежностью, теплом<br>
-        и совсем чуть-чуть <span class="highlight">космоса</span> 🚀
+        Волшебная история<br>
+        для <span class="highlight">милой Зайки</span>
       </h1>
       <p class="subtitle">
-        Я хотел сделать не просто страницу, а маленький мир, который хотя бы немного похож на тебя:
-        тёплый, красивый, уютный, сиреневый, с белыми розами, мягкостью, смешными деталями и чем-то очень личным.
+        Это не просто сайт, а маленькая книжка-сказка. Листай её медленно,
+        как будто открываешь страницы волшебной истории.
       </p>
-      <div class="hero-actions">
-        <button class="btn-main" id="openBtn" type="button">Открыть сюрприз ✨</button>
-      </div>
-      <div class="scroll-note">Теперь блоки листаются стрелками вправо и влево</div>
+      <button class="btn-main" id="openBtn" type="button">Открыть сказку ✨</button>
+      <div class="scroll-note">Внутри 9 слайдов и финальный подарок 🎁</div>
     </section>
 
     <section id="sliderSection" class="section-shell hidden">
       <div class="slider-header">
-        <div class="slider-title">История для Алины</div>
+        <div class="slider-title">Сказка про Зайку</div>
         <div class="slider-controls">
           <button class="arrow-btn" id="prevBtn" type="button">←</button>
-          <div class="counter" id="counter">1 / 7</div>
+          <div class="counter" id="counter">1 / 9</div>
           <button class="arrow-btn" id="nextBtn" type="button">→</button>
         </div>
       </div>
@@ -529,200 +440,110 @@
       <div class="tabs" id="tabs"></div>
 
       <div class="slider-window" id="sliderWindow">
-        <div class="slider-track" id="sliderTrack">
+        <div class="slider-track">
+
           <article class="slide active">
-            <h2>Ты очень особенная 🤍</h2>
-            <p class="lead">
-              Есть люди, рядом с которыми просто становится теплее. И ты именно такая.
-              Поэтому здесь всё собрано вокруг того, что с тобой ассоциируется: сиреневый свет, белая роза, кролик,
-              пушистый самоед, кола, сонный вайб, уют, немного аниме, немного милоты и день, который совпал с космосом.
-            </p>
+            <h2>Сегодня у милой Зайки день рождения 🎂</h2>
+            <p class="lead">В честь этого ей пришло письмо с приглашением в волшебный мир.
+Она с хорошим настроением встала с утра, собрала сумочку и отправилась в поездку.</p>
+            <img class="story-image" src="slide1.png" alt="Слайд 1" />
+            <div class="image-note">Замени slide1.png на свою первую картинку</div>
+          </article>
 
-            <div class="chips">
-              <div class="chip">💜 тёплые сиреневые оттенки</div>
-              <div class="chip">🤍 белая роза</div>
-              <div class="chip">🐰 кролик</div>
-              <div class="chip">🐶 самоед</div>
-              <div class="chip">🥤 cola energy</div>
-              <div class="chip">😴 queen of sleep</div>
-            </div>
+          <article class="slide">
+            <h2>Цветочная арка</h2>
+            <p class="lead">Пару часов — и Зайка уже приехала на паровозе до цветочной арки. Дальше ей дорога была неизвестна.
+Она открыла письмо, чтобы вспомнить, что ей советовали.
+В письме было сказано, что ей нужно посмотреть на облака и широко искренне улыбнуться, что она и сделала.
+Вдруг раздался задорный вой и из-за облаков завиднелись милые щенята с белыми крыльями.</p>
+            <img class="story-image" src="slide2.png" alt="Слайд 2" />
+            <div class="image-note">Замени slide2.png на свою вторую картинку</div>
+          </article>
 
+          <article class="slide">
+            <h2>Полёт к небесам</h2>
+            <p class="lead">Щенята подлетели к Зайке и позвали её с собой.
+Она уселась на одного из них, и вся стая устремилась ввысь к небесам.
+Непонятно было, в каком направлении и насколько долго они летят, но было ужасно красиво и безрассудно весело.
+Время пролетело быстро, и вот они уже на подлёте к прекрасному голубому замку.</p>
+            <img class="story-image" src="slide3.png" alt="Слайд 3" />
+            <div class="image-note">Замени slide3.png на свою третью картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Тайна речки</h2>
+            <p class="lead">Зайку оставили перед воротами замка, и дальше щенята полетели по своим делам.
+Во дворе было много интересного, но больше всего её привлекли красивый мост и речка тёмного цвета с пузырями.
+Пахла она подозрительно аппетитно.
+Попробовала ли Зайка жидкость из этой речки — остаётся секретом, но главное, что козлёнком она не стала.</p>
+            <img class="story-image" src="slide4.png" alt="Слайд 4" />
+            <div class="image-note">Замени slide4.png на свою четвёртую картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Сад белых роз 🤍</h2>
+            <p class="lead">После речки её ждали прекрасные и благоухающие сады.
+Казалось, что в них можно было наткнуться на абсолютно любое растение.
+Но больше всего Зайку привлёк куст очаровательных белых роз.
+Этот аромат Зайка запомнит надолго, как и нежность этих лепестков.</p>
+            <img class="story-image" src="slide5.png" alt="Слайд 5" />
+            <div class="image-note">Замени slide5.png на свою пятую картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Башня колдуна</h2>
+            <p class="lead">Зайка прошла через сад, и вот уже виднелась башня её друга-колдуна, который её пригласил.
+Странно, но у башни не было двери для входа.
+Осмотрев башню, Зайка заметила способ подняться.
+Сверху свисала какая-то шевелюра — в целом сойдёт за верёвочную лестницу.</p>
+            <img class="story-image" src="slide6.png" alt="Слайд 6" />
+            <div class="image-note">Замени slide6.png на свою шестую картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Борода колдуна 😄</h2>
+            <p class="lead">Пару минут — и Зайка уже лезет по ней в верхнюю башню.
+Немного стараний — и она внутри.
+Оказалось, что это борода колдуна, который спал рядом на кровати.
+Услышав шум, он проснулся и поприветствовал Зайку.</p>
+            <img class="story-image" src="slide7.png" alt="Слайд 7" />
+            <div class="image-note">Замени slide7.png на свою седьмую картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Чай, торт и старые времена</h2>
+            <p class="lead">Колдун и Зайка долго разговаривали о старых временах, пили чай с тортиком,
+а после колдун принёс коробочку с подарком Зайке на праздник.
+Зайка поблагодарила, и они разошлись по спальням.</p>
+            <img class="story-image" src="slide8.png" alt="Слайд 8" />
+            <div class="image-note">Замени slide8.png на свою восьмую картинку</div>
+          </article>
+
+          <article class="slide">
+            <h2>Коробочка с подарком 🎁</h2>
+            <p class="lead">В спальне Зайка открыла коробочку и увидела бутылочку тёмной жидкости с красивой этикеткой,
+великолепную брошь в форме прекрасного цветка и волшебный свисток для щенят,
+которые отвезут её туда, куда ей нужно, в любое время.</p>
+            <img class="story-image" src="slide9.png" alt="Слайд 9" />
             <div class="controls">
-              <button class="btn-ghost" type="button" onclick="toggleBlock('letter')">Открыть письмо 💌</button>
-              <button class="btn-ghost" type="button" onclick="toggleBlock('sleepBox')">Если ты сонная 😴</button>
-              <button class="btn-ghost" type="button" onclick="toggleBlock('colaBox')">Кнопка колы 🥤</button>
+              <button class="btn-main" type="button" onclick="toggleGiftPanel()">Получить подарок 🎁</button>
             </div>
-
-            <div id="letter" class="letter hidden">
-Алина,
-
-Я хотел сделать тебе не просто подарок, а что-то, во что можно зайти, посмотреть, поулыбаться и почувствовать, что это всё правда делалось именно для тебя.
-
-Пусть этот сайт пока состоит из кнопок, света, текста и маленьких деталей — но на самом деле внутри него намного больше.
-Там моё внимание к тебе.
-Моё тепло.
-И желание увидеть твою улыбку, когда ты всё это откроешь.
-
-Ты очень красивая.
-Очень уютная.
-Очень своя.
-И очень-очень важная для меня 🤍
-            </div>
-
-            <div id="sleepBox" class="sleep-box hidden">
-Если ты сейчас хочешь спать, то это очень в твоём стиле 😌
-
-Так что официальный режим для Алины включён:
-спать можно,
-зевать можно,
-быть милой в полусне — обязательно.
-
-И да, на всякий случай:
-ты мне нравишься даже сонная,
-очень сонная,
-максимально сонная,
-и даже в режиме «я сейчас ничего не понимаю, дайте лечь обратно» 💜
-            </div>
-
-            <div id="colaBox" class="secret-box hidden">
-Экстренное сообщение:
-уровень милоты Алины стабильно высокий.
-Рекомендуемая поддержка системы:
-1) дать ей колу 🥤
-2) дать ей уют
-3) не мешать быть прекрасной
+            <div id="giftPanel" class="gift-panel hidden">
+              <strong>Подарок для Алины 🤍</strong>
+              В этой коробочке спрятан маленький волшебный набор:
+              <div class="gift-list">
+                <div class="gift-item"><b>Тёмная бутылочка</b> — для капли магии и уюта.</div>
+                <div class="gift-item"><b>Брошь-цветок</b> — как напоминание о белых розах из сказочного сада.</div>
+                <div class="gift-item"><b>Волшебный свисток</b> — чтобы щенята всегда могли прийти на помощь.</div>
+              </div>
+              С днём рождения, Алина 💜
             </div>
           </article>
 
-          <article class="slide">
-            <h2>Твой вайб</h2>
-            <p class="lead">
-              Я попытался собрать твой образ не серьёзно и скучно, а так, чтобы это было мило, тепло и немного по-нашему.
-            </p>
-            <div class="grid-4">
-              <div class="card">
-                <h3>🤍 Белая роза</h3>
-                <p>Самый нежный символ на этом сайте. Спокойная, красивая и очень в тему. Её здесь можно считать твоим маленьким знаком.</p>
-              </div>
-              <div class="card">
-                <h3>🐰 Кролик</h3>
-                <p>Потому что это не просто милое животное, а ещё и очень личная деталь. Нежность, мягкость и домашний уют в одном существе.</p>
-              </div>
-              <div class="card">
-                <h3>🐶 Самоед</h3>
-                <p>Потому что невозможно пройти мимо такого уровня пушистости. Здесь он отвечает за мягкость, свет и хорошее настроение.</p>
-              </div>
-              <div class="card">
-                <h3>🥤 Кола</h3>
-                <p>Нужна как обязательный артефакт. Потому что любой красивый сайт для тебя без колы был бы не до конца настоящим.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide">
-            <h2>Мини-карта нежности</h2>
-            <p class="lead">Это блок, который можно потом легко переделать под ваши реальные приколы, но пока я сделал тебе основу.</p>
-            <div class="grid-3">
-              <div class="card">
-                <h3>🌙 Сонный режим</h3>
-                <p>Если Алина хочет спать, значит мир обязан стать тише, мягче и добрее. Это закон.</p>
-              </div>
-              <div class="card">
-                <h3>💜 Сиреневое настроение</h3>
-                <p>Всё здесь специально сделано в тёплых оттенках, чтобы сайт ощущался нежно, а не просто «романтически по шаблону».</p>
-              </div>
-              <div class="card">
-                <h3>✨ Эффект Алины</h3>
-                <p>Ты из тех людей, которые делают любую штуку уютнее просто своим присутствием. Даже страницу в браузере.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide">
-            <h2>Твои любимые штуки</h2>
-            <p class="lead">Я оставил это как милые карточки. Потом можно будет докрутить и сделать ещё точнее.</p>
-            <div class="grid-3">
-              <div class="card">
-                <h3>🎴 Клинок, рассекающий демонов</h3>
-                <p>Потому что у красивых девушек часто ещё и сильный вкус на любимые истории.</p>
-              </div>
-              <div class="card">
-                <h3>🎬 Лило и Стич</h3>
-                <p>Очень тёплая и уютная ассоциация. Немного хаоса, много сердца и ощущение чего-то родного.</p>
-              </div>
-              <div class="card">
-                <h3>🎧 МУККА</h3>
-                <p>Оставим здесь как часть твоего настроения, потому что музыка тоже про человека очень многое говорит.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide">
-            <h2>12 апреля — это вообще-то мощно</h2>
-            <p class="lead">
-              Потому что твой день рождения — уже сам по себе событие. Но тут ещё и День космонавтики,
-              а в этом году даже Пасха. Слишком сильное совпадение, чтобы его не обыграть.
-            </p>
-            <div class="timeline">
-              <div class="timeline-item">
-                <strong>🎂 День рождения Алины</strong>
-                Самый главный повод. Без вариантов.
-              </div>
-              <div class="timeline-item">
-                <strong>🚀 День космонавтики</strong>
-                В этот день человечество вышло в космос. Но лично для меня важнее то, что в этот день появилась ты.
-              </div>
-              <div class="timeline-item">
-                <strong>🌸 Пасхальное настроение</strong>
-                Значит в этой дате есть ещё и что-то светлое, тёплое и очень весеннее.
-              </div>
-            </div>
-            <div class="controls">
-              <button class="btn-ghost" type="button" onclick="toggleBlock('cosmicBox')">Космическая кнопка 🚀</button>
-            </div>
-            <div id="cosmicBox" class="cosmic-box hidden">
-Официальное заявление:
-
-12 апреля — это день, когда случилось сразу несколько серьёзных событий.
-Но если честно,
-рождение Алины в этом списке уверенно забирает первое место.
-
-Извини, космос,
-сегодня ты только второй 🌌
-            </div>
-          </article>
-
-          <article class="slide">
-            <h2>Галерея для ваших фото</h2>
-            <p class="lead">Сюда ты потом вставишь реальные фотографии. Пока я оставил красивые заглушки, чтобы уже был понятен стиль.</p>
-            <div class="gallery">
-              <div class="photo">📷 Здесь можно поставить фото, где она выглядит особенно красивой</div>
-              <div class="photo">📷 Здесь — ваше любимое совместное фото</div>
-              <div class="photo">📷 Здесь — что-то смешное, тёплое или очень ваше</div>
-            </div>
-          </article>
-
-          <article class="slide">
-            <h2>Секретный блок</h2>
-            <p class="lead">Это уже чисто для прикола. Открывается отдельно и даёт ощущение маленькой пасхалки.</p>
-            <div class="controls">
-              <button class="btn-main" type="button" onclick="toggleBlock('finalGift')">Открыть секретный финал 🎁</button>
-            </div>
-            <div id="finalGift" class="final-box hidden">
-              <div class="final-text">
-                Алина,
-                ты правда очень-очень классная.
-                И этот сайт — мой способ сказать тебе:
-                ты для меня особенная 🤍
-              </div>
-              <div class="tiny-note">А если ты сейчас улыбаешься, значит весь этот сюрприз уже сработал как надо.</div>
-            </div>
-          </article>
         </div>
       </div>
 
-      <div class="swipe-note">Можно листать стрелками, нажимать на верхние кнопки и даже свайпать на телефоне.</div>
-      <div class="book-note">Теперь это ощущается как маленькая книжка</div>
+      <div class="swipe-note">Можно листать стрелками, кнопками сверху и свайпом на телефоне.</div>
     </section>
   </div>
 
@@ -737,8 +558,8 @@
     const openBtn = document.getElementById('openBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    const labels = ['Начало', 'Твой вайб', 'Нежность', 'Любимое', '12 апреля', 'Фото', 'Финал'];
     let currentSlide = 0;
     let isAnimating = false;
 
@@ -752,7 +573,7 @@
       stars.appendChild(star);
     }
 
-    const symbols = ['🤍', '💜', '✨', '🐰', '🌸'];
+    const symbols = ['🤍', '✨', '🌸', '🐰'];
     function createFloater() {
       const item = document.createElement('div');
       item.className = 'floater';
@@ -778,9 +599,7 @@
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtx) return;
-        if (!window.__pageAudioCtx) {
-          window.__pageAudioCtx = new AudioCtx();
-        }
+        if (!window.__pageAudioCtx) window.__pageAudioCtx = new AudioCtx();
         const ctx = window.__pageAudioCtx;
         if (ctx.state === 'suspended') ctx.resume();
 
@@ -833,7 +652,6 @@
       isAnimating = true;
       const oldSlide = slides[currentSlide];
       const newSlide = slides[nextIndex];
-
       const movingForward = nextIndex > currentSlide || (currentSlide === slides.length - 1 && nextIndex === 0);
 
       slides.forEach(slide => {
@@ -868,16 +686,15 @@
       playPageSound();
     }
 
-    function toggleBlock(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.classList.toggle('hidden');
+    function toggleGiftPanel() {
+      const panel = document.getElementById('giftPanel');
+      if (panel) panel.classList.toggle('hidden');
     }
 
     openBtn.addEventListener('click', openSlider);
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
-    window.toggleBlock = toggleBlock;
+    window.toggleGiftPanel = toggleGiftPanel;
 
     let startX = 0;
     let endX = 0;
