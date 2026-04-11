@@ -489,9 +489,39 @@
             <p class="lead">В спальне Зайка открыла коробочку и увидела бутылочку тёмной жидкости с красивой этикеткой, великолепную брошь в форме прекрасного цветка и волшебный свисток для щенят, которые отвезут её туда, куда ей нужно, в любое время.</p>
             <img class="story-image" src="slide9.png" alt="Слайд 9" />
             <div class="controls">
-              <button class="btn-main" type="button" onclick="toggleGiftPanel()">Получить подарок 🎁</button>
+              <button class="btn-main" type="button" onclick="showGift()">Открыть подарок 🎁</button>
             </div>
             <div id="giftPanel" class="gift-panel hidden">
+
+  <div class="gift-stage">
+    <div id="giftClosed" class="gift-box" onclick="openGift()">🎁</div>
+
+    <div id="giftBurst" class="gift-burst hidden"></div>
+
+    <div id="giftSparkles" class="gift-sparkles hidden">
+      <span>✨</span>
+      <span>💖</span>
+      <span>✨</span>
+      <span>💫</span>
+      <span>🤍</span>
+    </div>
+  </div>
+
+  <div id="giftContent" class="gift-content hidden">
+    <strong>Подарок для Алины 🤍</strong>
+
+    <img src="slide10.png" class="story-image gift-image">
+
+    <div class="gift-list">
+      <div class="gift-item"><b>Тёмная бутылочка</b></div>
+      <div class="gift-item"><b>Брошь-цветок</b></div>
+      <div class="gift-item"><b>Свисток</b></div>
+    </div>
+
+    С днём рождения 💜
+  </div>
+
+</div>
               <strong>Подарок для Алины 🤍</strong>
               В этой коробочке спрятан маленький волшебный набор:
               <div class="gift-list">
