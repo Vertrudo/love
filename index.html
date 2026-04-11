@@ -151,15 +151,6 @@
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
     }
 
-    .btn-ghost {
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-size: 15px;
-      color: white;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
     .scroll-note {
       font-size: 14px;
       opacity: 0.82;
@@ -386,6 +377,132 @@
       color: white;
     }
 
+    .gift-stage {
+      position: relative;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .gift-box {
+      font-size: 82px;
+      cursor: pointer;
+      user-select: none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.28));
+      animation: giftWiggle 2s ease-in-out infinite;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.06);
+    }
+
+    .gift-box.opening {
+      animation: none;
+      transform: scale(0.75) rotate(-8deg);
+      opacity: 0;
+    }
+
+    @keyframes giftWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-5deg); }
+      40% { transform: rotate(5deg); }
+      60% { transform: rotate(-3deg); }
+      80% { transform: rotate(3deg); }
+    }
+
+    .gift-burst {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.08));
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0);
+    }
+
+    .gift-burst.show {
+      animation: burstPop 0.7s ease forwards;
+    }
+
+    @keyframes burstPop {
+      0% { transform: scale(0); opacity: 1; }
+      70% { transform: scale(7); opacity: 0.45; }
+      100% { transform: scale(10); opacity: 0; }
+    }
+
+    .gift-sparkles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .gift-sparkles span {
+      position: absolute;
+      font-size: 26px;
+      opacity: 0;
+    }
+
+    .gift-sparkles.show span:nth-child(1) { left: 34%; top: 58%; animation: sparkleFly1 1s ease forwards; }
+    .gift-sparkles.show span:nth-child(2) { left: 43%; top: 48%; animation: sparkleFly2 1.05s ease forwards; }
+    .gift-sparkles.show span:nth-child(3) { left: 50%; top: 58%; animation: sparkleFly3 1s ease forwards; }
+    .gift-sparkles.show span:nth-child(4) { left: 58%; top: 48%; animation: sparkleFly4 1.05s ease forwards; }
+    .gift-sparkles.show span:nth-child(5) { left: 66%; top: 58%; animation: sparkleFly5 1s ease forwards; }
+
+    @keyframes sparkleFly1 {
+      from { transform: translate(0,0) scale(0.4); opacity: 0; }
+      to { transform: translate(-75px,-70px) scale(1.2); opacity: 1; }
+    }
+
+    @keyframes sparkleFly2 {
+      from { transform: translate(0,0) scale(0.4); opacity: 0; }
+      to { transform: translate(-35px,-105px) scale(1.15); opacity: 1; }
+    }
+
+    @keyframes sparkleFly3 {
+      from { transform: translate(0,0) scale(0.4); opacity: 0; }
+      to { transform: translate(0,-120px) scale(1.25); opacity: 1; }
+    }
+
+    @keyframes sparkleFly4 {
+      from { transform: translate(0,0) scale(0.4); opacity: 0; }
+      to { transform: translate(35px,-105px) scale(1.15); opacity: 1; }
+    }
+
+    @keyframes sparkleFly5 {
+      from { transform: translate(0,0) scale(0.4); opacity: 0; }
+      to { transform: translate(75px,-70px) scale(1.2); opacity: 1; }
+    }
+
+    .gift-content {
+      opacity: 0;
+      transform: translateY(18px) scale(0.96);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .gift-content.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .gift-image {
+      opacity: 0;
+      transform: scale(0.96);
+      animation: giftImageReveal 0.9s ease forwards;
+      animation-delay: 0.12s;
+    }
+
+    @keyframes giftImageReveal {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .swipe-note {
       margin-top: 10px;
       text-align: center;
@@ -400,6 +517,8 @@
       .slider-header { justify-content: center; }
       .tabs { justify-content: center; }
       .slider-window, .slider-track { min-height: 780px; }
+      .gift-stage { height: 180px; }
+      .gift-box { font-size: 72px; }
     }
   </style>
 </head>
@@ -440,13 +559,13 @@
           <article class="slide active">
             <p class="lead">Сегодня у милой Зайки день рождения. В честь этого ей пришло письмо с приглашением в волшебный мир. Она с хорошим настроением встала с утра, собрала сумочку и отправилась в поездку.</p>
             <img class="story-image" src="slide1.png" alt="Слайд 1" />
-            <div class="image-note"/div>
+            <div class="image-note"></div>
           </article>
 
           <article class="slide">
             <p class="lead">Пару часов — и Зайка уже приехала на паровозе до цветочной арки. Дальше ей дорога была неизвестна. Она открыла письмо, чтобы вспомнить, что ей советовали. В письме было сказано, что ей нужно посмотреть на облака и широко искренне улыбнуться, что она и сделала. Вдруг раздался задорный вой и из-за облаков завиднелись милые щенята с белыми крыльями.</p>
             <img class="story-image" src="slide2.png" alt="Слайд 2" />
-            <div class="image-note">/div>
+            <div class="image-note"></div>
           </article>
 
           <article class="slide">
@@ -491,45 +610,30 @@
             <div class="controls">
               <button class="btn-main" type="button" onclick="showGift()">Открыть подарок 🎁</button>
             </div>
+
             <div id="giftPanel" class="gift-panel hidden">
-
-  <div class="gift-stage">
-    <div id="giftClosed" class="gift-box" onclick="openGift()">🎁</div>
-
-    <div id="giftBurst" class="gift-burst hidden"></div>
-
-    <div id="giftSparkles" class="gift-sparkles hidden">
-      <span>✨</span>
-      <span>💖</span>
-      <span>✨</span>
-      <span>💫</span>
-      <span>🤍</span>
-    </div>
-  </div>
-
-  <div id="giftContent" class="gift-content hidden">
-    <strong>Подарок для Алины 🤍</strong>
-
-    <img src="slide10.png" class="story-image gift-image">
-
-    <div class="gift-list">
-      <div class="gift-item"><b>Тёмная бутылочка</b></div>
-      <div class="gift-item"><b>Брошь-цветок</b></div>
-      <div class="gift-item"><b>Свисток</b></div>
-    </div>
-
-    С днём рождения 💜
-  </div>
-
-</div>
-              <strong>Подарок для Алины 🤍</strong>
-              В этой коробочке спрятан маленький волшебный набор:
-              <div class="gift-list">
-                <div class="gift-item"><b>Тёмная бутылочка</b> — для капли магии и уюта.</div>
-                <div class="gift-item"><b>Брошь-цветок</b> — как напоминание о белых розах из сказочного сада.</div>
-                <div class="gift-item"><b>Волшебный свисток</b> — чтобы щенята всегда могли прийти на помощь.</div>
+              <div class="gift-stage">
+                <div id="giftClosed" class="gift-box" onclick="openGift()">🎁</div>
+                <div id="giftBurst" class="gift-burst hidden"></div>
+                <div id="giftSparkles" class="gift-sparkles hidden">
+                  <span>✨</span>
+                  <span>💖</span>
+                  <span>✨</span>
+                  <span>💫</span>
+                  <span>🤍</span>
+                </div>
               </div>
-              С днём рождения, Алина 💜
+
+              <div id="giftContent" class="gift-content hidden">
+                <strong>Подарок для Алины 🤍</strong>
+                <img src="slide10.png" class="story-image gift-image" alt="Подарок" />
+                <div class="gift-list">
+                  <div class="gift-item"><b>Тёмная бутылочка</b> — для капли магии и уюта.</div>
+                  <div class="gift-item"><b>Брошь-цветок</b> — как напоминание о белых розах из сказочного сада.</div>
+                  <div class="gift-item"><b>Волшебный свисток</b> — чтобы щенята всегда могли прийти на помощь.</div>
+                </div>
+                С днём рождения, Алина 💜
+              </div>
             </div>
           </article>
 
@@ -679,15 +783,64 @@
       playPageSound();
     }
 
-    function toggleGiftPanel() {
+    function showGift() {
       const panel = document.getElementById('giftPanel');
-      if (panel) panel.classList.toggle('hidden');
+      const box = document.getElementById('giftClosed');
+      const content = document.getElementById('giftContent');
+      const burst = document.getElementById('giftBurst');
+      const sparkles = document.getElementById('giftSparkles');
+
+      panel.classList.remove('hidden');
+      content.classList.add('hidden');
+      content.classList.remove('show');
+
+      if (box) {
+        box.style.display = 'block';
+        box.classList.remove('opening');
+      }
+
+      if (burst) {
+        burst.classList.add('hidden');
+        burst.classList.remove('show');
+      }
+
+      if (sparkles) {
+        sparkles.classList.add('hidden');
+        sparkles.classList.remove('show');
+      }
+    }
+
+    function openGift() {
+      const box = document.getElementById('giftClosed');
+      const content = document.getElementById('giftContent');
+      const burst = document.getElementById('giftBurst');
+      const sparkles = document.getElementById('giftSparkles');
+
+      if (!box || !content || !burst || !sparkles) return;
+
+      box.classList.add('opening');
+
+      setTimeout(() => {
+        burst.classList.remove('hidden');
+        burst.classList.add('show');
+        sparkles.classList.remove('hidden');
+        sparkles.classList.add('show');
+      }, 180);
+
+      setTimeout(() => {
+        box.style.display = 'none';
+        content.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          content.classList.add('show');
+        });
+      }, 520);
     }
 
     openBtn.addEventListener('click', openSlider);
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
-    window.toggleGiftPanel = toggleGiftPanel;
+    window.showGift = showGift;
+    window.openGift = openGift;
 
     let startX = 0;
     let endX = 0;
