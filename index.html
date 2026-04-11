@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Сказка для Алины 🤍</title>
+  <title>Сказка для Алины</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,7 +12,6 @@
       --bg-2: #241637;
       --bg-3: #3e2857;
       --glass: rgba(255,255,255,0.08);
-      --glass-2: rgba(255,255,255,0.12);
       --border: rgba(255,255,255,0.14);
       --text: #fff9fd;
       --muted: #ece0f0;
@@ -37,7 +36,7 @@
       position: relative;
     }
 
-    .stars, .floaters {
+    .stars {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -57,27 +56,6 @@
     @keyframes twinkle {
       0%, 100% { opacity: 0.25; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.8); }
-    }
-
-    .floater {
-      position: absolute;
-      bottom: -60px;
-      animation: drift linear forwards;
-      opacity: 0;
-      user-select: none;
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
-    }
-
-    @keyframes drift {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0deg) scale(0.95);
-        opacity: 0;
-      }
-      12% { opacity: 0.9; }
-      100% {
-        transform: translateY(-115vh) translateX(25px) rotate(18deg) scale(1.15);
-        opacity: 0;
-      }
     }
 
     .page {
@@ -101,7 +79,6 @@
     .mini-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       border: 1px solid rgba(255,255,255,0.15);
       background: rgba(255,255,255,0.08);
       color: #f7ecff;
@@ -130,6 +107,7 @@
       font-size: clamp(18px, 2.4vw, 23px);
       line-height: 1.7;
       color: var(--muted);
+      min-height: 1em;
     }
 
     button {
@@ -155,6 +133,7 @@
       font-size: 14px;
       opacity: 0.82;
       color: #f6e9ff;
+      min-height: 1em;
     }
 
     .hidden { display: none !important; }
@@ -326,6 +305,7 @@
       font-size: 13px;
       color: #f4e7f7;
       opacity: 0.7;
+      min-height: 1em;
     }
 
     .controls {
@@ -346,14 +326,14 @@
       line-height: 1.85;
       font-size: 18px;
       text-align: left;
-      white-space: pre-line;
+      white-space: normal;
     }
 
     .gift-panel strong {
       color: white;
       font-size: 22px;
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .gift-list {
@@ -379,12 +359,20 @@
 
     .gift-stage {
       position: relative;
-      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 0;
       overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin-bottom 0.35s ease;
+      max-height: 220px;
+      opacity: 1;
+    }
+
+    .gift-stage.opened {
+      max-height: 0;
+      opacity: 0;
+      margin-bottom: 0;
     }
 
     .gift-box {
@@ -435,53 +423,11 @@
       100% { transform: scale(10); opacity: 0; }
     }
 
-    .gift-sparkles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .gift-sparkles span {
-      position: absolute;
-      font-size: 26px;
-      opacity: 0;
-    }
-
-    .gift-sparkles.show span:nth-child(1) { left: 34%; top: 58%; animation: sparkleFly1 1s ease forwards; }
-    .gift-sparkles.show span:nth-child(2) { left: 43%; top: 48%; animation: sparkleFly2 1.05s ease forwards; }
-    .gift-sparkles.show span:nth-child(3) { left: 50%; top: 58%; animation: sparkleFly3 1s ease forwards; }
-    .gift-sparkles.show span:nth-child(4) { left: 58%; top: 48%; animation: sparkleFly4 1.05s ease forwards; }
-    .gift-sparkles.show span:nth-child(5) { left: 66%; top: 58%; animation: sparkleFly5 1s ease forwards; }
-
-    @keyframes sparkleFly1 {
-      from { transform: translate(0,0) scale(0.4); opacity: 0; }
-      to { transform: translate(-75px,-70px) scale(1.2); opacity: 1; }
-    }
-
-    @keyframes sparkleFly2 {
-      from { transform: translate(0,0) scale(0.4); opacity: 0; }
-      to { transform: translate(-35px,-105px) scale(1.15); opacity: 1; }
-    }
-
-    @keyframes sparkleFly3 {
-      from { transform: translate(0,0) scale(0.4); opacity: 0; }
-      to { transform: translate(0,-120px) scale(1.25); opacity: 1; }
-    }
-
-    @keyframes sparkleFly4 {
-      from { transform: translate(0,0) scale(0.4); opacity: 0; }
-      to { transform: translate(35px,-105px) scale(1.15); opacity: 1; }
-    }
-
-    @keyframes sparkleFly5 {
-      from { transform: translate(0,0) scale(0.4); opacity: 0; }
-      to { transform: translate(75px,-70px) scale(1.2); opacity: 1; }
-    }
-
     .gift-content {
       opacity: 0;
-      transform: translateY(18px) scale(0.96);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(20px) scale(0.97);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      margin-top: 0;
     }
 
     .gift-content.show {
@@ -491,15 +437,17 @@
 
     .gift-image {
       opacity: 0;
-      transform: scale(0.96);
+      transform: translateY(12px) scale(0.98);
+    }
+
+    .gift-content.show .gift-image {
       animation: giftImageReveal 0.9s ease forwards;
-      animation-delay: 0.12s;
     }
 
     @keyframes giftImageReveal {
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -517,25 +465,23 @@
       .slider-header { justify-content: center; }
       .tabs { justify-content: center; }
       .slider-window, .slider-track { min-height: 780px; }
-      .gift-stage { height: 180px; }
       .gift-box { font-size: 72px; }
+      .gift-stage { max-height: 180px; }
     }
   </style>
 </head>
 <body>
   <div class="stars" id="stars"></div>
-  <div class="floaters" id="floaters"></div>
 
   <div class="page">
     <section class="hero">
-      <div class="mini-badge">Счастливого путешествия!</div>
+      <div class="mini-badge">Для любимой!</div>
       <h1>
         Волшебная история<br>
         о <span class="highlight">милой Зайке</span>
       </h1>
-      <p class="subtitle">
-      </p>
-      <button class="btn-main" id="openBtn" type="button">Открыть сказку ✨</button>
+      <p class="subtitle"></p>
+      <button class="btn-main" id="openBtn" type="button">Открыть сказку</button>
       <div class="scroll-note"></div>
     </section>
 
@@ -602,35 +548,30 @@
             <div class="image-note"></div>
           </article>
 
-         <article class="slide">
-  <p class="lead">В спальне Зайка открыла коробочку и увидела......</p>
-  <img class="story-image" src="slide9.png" alt="Слайд 9" />
+          <article class="slide">
+            <p class="lead">В спальне Зайка открыла коробочку и увидела......</p>
+            <img class="story-image" src="slide9.png" alt="Слайд 9" />
 
-  <div class="controls">
-    <button class="btn-main" type="button" onclick="showGift()">Открыть подарок 🎁</button>
-  </div>
+            <div class="controls">
+              <button class="btn-main" type="button" onclick="showGift()">Открыть подарок</button>
+            </div>
 
-  <div id="giftPanel" class="gift-panel hidden">
-    <div class="gift-stage">
-      <div id="giftClosed" class="gift-box" onclick="openGift()">🎁</div>
+            <div id="giftPanel" class="gift-panel hidden">
+              <div id="giftStage" class="gift-stage">
+                <div id="giftClosed" class="gift-box" onclick="openGift()">🎁</div>
+                <div id="giftBurst" class="gift-burst hidden"></div>
+              </div>
 
-      <div id="giftBurst" class="gift-burst hidden"></div>
+              <div id="giftContent" class="gift-content hidden">
+                <strong>Подарок для Алины</strong>
 
-    <div id="giftContent" class="gift-content hidden">
-      <strong>Подарок для Алины 🤍</strong>
+                <img src="slide0.png" class="story-image gift-image" alt="Подарок">
 
-      <img src="slide10.png" class="story-image gift-image" alt="Подарок">
-
-      <div class="gift-list">
-        <div class="gift-item"><b>Бутылочка освежающего напитка</b> — для капли магии.</div>
-        <div class="gift-item"><b>Брошь-цветок</b> — как напоминание о белых розах.</div>
-        <div class="gift-item"><b>Волшебный свисток</b> — чтобы щенята всегда могли прийти на помощь.</div>
-      </div>
-
-      С днём рождения, Алина 💜
-    </div>
-  </div>
-</article>
+                <div class="gift-list">
+                  <div class="gift-item"><b>Бутылочка освежающего напитка</b> — для капли магии и уюта.</div>
+                  <div class="gift-item"><b>Красивая брошь в форме цветка</b> — как напоминание о вечной красоте.</div>
+                  <div class="gift-item"><b>Волшебный свисток</b> — чтобы щенята всегда могли унести в прекрасные места.</div>
+                </div>
               </div>
             </div>
           </article>
@@ -644,7 +585,6 @@
 
   <script>
     const stars = document.getElementById('stars');
-    const floaters = document.getElementById('floaters');
     const sliderSection = document.getElementById('sliderSection');
     const slides = Array.from(document.querySelectorAll('.slide'));
     const counter = document.getElementById('counter');
@@ -667,19 +607,6 @@
       star.style.opacity = (0.2 + Math.random() * 0.8).toFixed(2);
       stars.appendChild(star);
     }
-
-    const symbols = ['🤍', '✨', '🌸', '🐰'];
-    function createFloater() {
-      const item = document.createElement('div');
-      item.className = 'floater';
-      item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-      item.style.left = Math.random() * 100 + 'vw';
-      item.style.fontSize = (16 + Math.random() * 18) + 'px';
-      item.style.animationDuration = (7 + Math.random() * 6) + 's';
-      floaters.appendChild(item);
-      setTimeout(() => item.remove(), 14000);
-    }
-    setInterval(createFloater, 700);
 
     labels.forEach((label, index) => {
       const btn = document.createElement('button');
@@ -783,49 +710,42 @@
 
     function showGift() {
       const panel = document.getElementById('giftPanel');
+      const stage = document.getElementById('giftStage');
       const box = document.getElementById('giftClosed');
       const content = document.getElementById('giftContent');
       const burst = document.getElementById('giftBurst');
-      const sparkles = document.getElementById('giftSparkles');
+
+      if (!panel || !stage || !box || !content || !burst) return;
 
       panel.classList.remove('hidden');
+      stage.classList.remove('opened');
       content.classList.add('hidden');
       content.classList.remove('show');
 
-      if (box) {
-        box.style.display = 'block';
-        box.classList.remove('opening');
-      }
+      box.style.display = 'block';
+      box.classList.remove('opening');
 
-      if (burst) {
-        burst.classList.add('hidden');
-        burst.classList.remove('show');
-      }
-
-      if (sparkles) {
-        sparkles.classList.add('hidden');
-        sparkles.classList.remove('show');
-      }
+      burst.classList.add('hidden');
+      burst.classList.remove('show');
     }
 
     function openGift() {
+      const stage = document.getElementById('giftStage');
       const box = document.getElementById('giftClosed');
       const content = document.getElementById('giftContent');
       const burst = document.getElementById('giftBurst');
-      const sparkles = document.getElementById('giftSparkles');
 
-      if (!box || !content || !burst || !sparkles) return;
+      if (!stage || !box || !content || !burst) return;
 
       box.classList.add('opening');
 
       setTimeout(() => {
         burst.classList.remove('hidden');
         burst.classList.add('show');
-        sparkles.classList.remove('hidden');
-        sparkles.classList.add('show');
       }, 180);
 
       setTimeout(() => {
+        stage.classList.add('opened');
         box.style.display = 'none';
         content.classList.remove('hidden');
         requestAnimationFrame(() => {
